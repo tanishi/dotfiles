@@ -1,0 +1,17 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "typescript",
+    "typescriptreact",
+    "eruby"
+  ],
+  "suggest.keepCompleteopt": true,
+  "solargraph.diagnostics": true,
+  "solargraph.formatting": true,
+  "emmet.includeLanguages": {
+    "eruby": "html"
+  }
+}

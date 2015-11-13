@@ -1,0 +1,45 @@
+[[plugins]]
+repo = "neoclide/coc.nvim"
+merged = 0
+rev = "release"
+
+[[plugins]]
+repo = "ulwlu/elly.vim"
+
+[[plugins]]
+repo = "tpope/vim-endwise"
+
+[[plugins]]
+repo = "w0rp/ale"
+
+[[plugins]]
+repo = "leafgarland/typescript-vim"
+
+[[plugins]]
+repo = "peitalin/vim-jsx-typescript"
+
+[[plugins]]
+repo = "junegunn/fzf"
+build = "./install --all"
+
+[[plugins]]
+repo = "junegunn/fzf.vim"
+
+[[plugins]]
+repo = "antoinemadec/coc-fzf"
+
+[[plugins]]
+repo = "skanehira/preview-markdown.vim"
+
+[[plugins]]
+repo = "plasticboy/vim-markdown"
+
+[[plugins]]
+repo = "nvim-treesitter/nvim-treesitter"
+merged = 0
+
+[[plugins]]
+repo = "mattn/emmet-vim"
+
+[[plugins]]
+repo = "jiangmiao/auto-pairs"
