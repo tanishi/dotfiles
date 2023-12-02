@@ -1,5 +1,4 @@
-ZSHRC_DIR=${${(%):-%N}:A:h}
-export SHELDON_CONFIG_DIR="$ZSHRC_DIR/sheldon"
+export SHELDON_CONFIG_DIR=".config/zsh/sheldon"
 
 eval "$(sheldon source)"
 
