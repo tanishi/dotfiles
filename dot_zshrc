@@ -1,4 +1,88 @@
 export SHELDON_CONFIG_DIR=".config/zsh/sheldon"
 
-eval "$(sheldon source)"
+alias ls='ls --color=auto'
+alias gcd='cd $(ghq root)/$(ghq list | fzf)'
+alias g='git'
+alias doco='docker compose'
+alias vim='nvim'
+alias python3='python'
 
+SAVEHIST=10000
+HISTSIZE=10000
+
+. $HOME/.asdf/asdf.sh
+
+# if [ -d $HOME/.anyenv ]
+# then
+#     export PATH="$HOME/.anyenv/bin:$PATH"
+#     eval "$(anyenv init -)"
+# fi
+
+export GOPATH=$(go env GOPATH)
+export PATH=$PATH:$GOPATH/bin
+export EDITOR=vim
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.bin:$PATH
+
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS="@im=fcitx"
+export DefaultIMModule=fcitx
+export LESSCHARSET=utf-8
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LC_CTYPE=ja_JP.UTF-8
+xset -r 49
+
+if [ $SHLVL = 1 ] ; then
+  xset -r 49  > /dev/null 2>&1
+  (fcitx-autostart > /dev/null 2>&1 &)
+fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(direnv hook zsh)"
+
+if [[ $(command -v exa) ]]; then
+  alias e='exa --icons --git'
+  alias l=e
+  alias ls=e
+  alias ea='exa -a --icons --git'
+  alias la=ea
+  alias ee='exa -aahl --icons --git'
+  alias ll=ee
+  alias et='exa -T -L 3 -a -I "node_modules|.git|.cache" --icons'
+  alias lt=et
+  alias eta='exa -T -a -I "node_modules|.git|.cache" --color=always --icons | less -r'
+  alias lta=eta
+  alias l='clear && ls'
+fi
+
+
+function aws_mfa() {
+  if [ $# != 1 ]; then
+    echo "profileを指定してください"
+    return
+  fi
+  unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
+  printf '%s ' 'MFAトークン: '
+  read token
+  eval `aws sts get-session-token --profile $1 \
+          --serial-number $(aws sts get-caller-identity --profile $1 --query Arn --output text | sed 's/:user/:mfa/') \
+          --token-code ${token} \
+          --duration-seconds 129600 \
+        | awk ' $1 == "\"AccessKeyId\":" { gsub(/\"/,""); gsub(/,/,""); print "export AWS_ACCESS_KEY_ID="$2 } $1 == "\"SecretAccessKey\":" { gsub(/\"/,""); gsub(/,/,""); print "export AWS_SECRET_ACCESS_KEY="$2} $1 == "\"SessionToken\":" { gsub(/\"/,""); gsub(/,/,""); print "export AWS_SESSION_TOKEN="$2 } '`
+}
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+
+# pnpm
+export PNPM_HOME="/home/tanishi/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+#
+
+eval "$(sheldon source)"
+eval "$(starship init zsh)"

@@ -1,0 +1,14 @@
+[aws]
+disabled = true
+
+[cmd_duration]
+min_time = 0
+
+[python]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[ruby]
+disabled = true
