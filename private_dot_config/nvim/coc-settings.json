@@ -1,5 +1,5 @@
 {
   "rust-analyzer.check.command": "clippy",
-  "snippets.ultisnips.pythonPrompt": false
+  "snippets.ultisnips.pythonPrompt": false,
+  "coc.preferences.formatOnSaveFiletypes":  ["*"]
 }
-
