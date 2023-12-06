@@ -4,7 +4,7 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.number = true
-vim.api.nvim_set_keymap('i', 'jj', '<ESC>', {silent=true})
+vim.api.nvim_set_keymap('i', 'jj', '<ESC>', { silent = true })
 
 vim.api.nvim_set_keymap('n', '<Space>e', '<Cmd>CocCommand explorer<CR>', { noremap = true, silent = true })
 
@@ -19,7 +19,7 @@ local plugins = {
   },
   {
     'github/copilot.vim',
-  }
+  },
 }
 
 -- lazy start
@@ -39,3 +39,4 @@ require("lazy").setup(plugins, opts)
 
 vim.g.rustfmt_autosave = 1
 
+vim.api.nvim_set_keymap('n', 'gd', '<Plug>(coc-definition)', { silent = true })
