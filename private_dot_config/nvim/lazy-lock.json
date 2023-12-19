@@ -1,5 +1,11 @@
 {
+  "auto-pairs": { "branch": "master", "commit": "39f06b873a8449af8ff6a3eee716d3da14d63a76" },
+  "bufferline.nvim": { "branch": "main", "commit": "ac788fbc493839c1e76daa8d119934b715fdb90e" },
   "coc.nvim": { "branch": "release", "commit": "7b9e1ef0a1399907c51d23b6080b94a5aba4a654" },
+  "copilot.vim": { "branch": "release", "commit": "719dd8d0beab993dbad47a9e86ecb0dbd4a99da5" },
   "lazy.nvim": { "branch": "main", "commit": "3ad55ae678876516156cca2f361c51f7952a924b" },
-  "rust.vim": { "branch": "master", "commit": "889b9a7515db477f4cb6808bef1769e53493c578" }
+  "nvim-treesitter": { "branch": "master", "commit": "9ab4e9cc8989e3811b14897cd0eb21ae35e5541e" },
+  "plenary.nvim": { "branch": "master", "commit": "253d34830709d690f013daf2853a9d21ad7accab" },
+  "rust.vim": { "branch": "master", "commit": "889b9a7515db477f4cb6808bef1769e53493c578" },
+  "telescope.nvim": { "branch": "master", "commit": "54930e1abfc94409e1bb9266e752ef8379008592" }
 }
