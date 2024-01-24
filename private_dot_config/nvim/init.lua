@@ -12,6 +12,9 @@ vim.api.nvim_set_keymap('n', '<Space>e', '<Cmd>CocCommand explorer<CR>', { norem
 vim.api.nvim_set_keymap('n', '<leader>qf', '<Plug>(coc-fix-current)', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'K', ':lua show_documentation()<CR>', { noremap = true, silent = true })
 
+vim.g.copilot_filetypes = { ['*'] = true }
+vim.cmd('autocmd bufnewfile,bufread *.yml set filetype=yaml')
+
 function show_documentation()
   local filetype = vim.bo.filetype
   local keywordprg = vim.bo.keywordprg
@@ -29,6 +32,9 @@ end
 -- plugins
 local plugins = {
   {
+    'cocopon/iceberg.vim',
+  },
+  {
     'neoclide/coc.nvim',
     branch = "release",
   },
@@ -37,6 +43,7 @@ local plugins = {
   },
   {
     'github/copilot.vim',
+    filetypes = { '*' },
   },
   {
     'nvim-lua/plenary.nvim',
@@ -50,9 +57,38 @@ local plugins = {
     config = function()
       require('nvim-treesitter.configs').setup {
         ensure_installed = "all",
-        highlight = {
+        auto_install = true,
+        indent = {
           enable = true,
         },
+        highlight = {
+          enable = false,
+        },
+      }
+    end,
+  },
+  {
+    'nvim-treesitter/playground',
+    config = function()
+      require('nvim-treesitter.configs').setup {
+        playground = {
+          enable = true,
+          disable = {},
+          updatetime = 25,
+          persist_queries = false,
+          keybindings = {
+            toggle_query_editor = 'o',
+            toggle_hl_groups = 'i',
+            toggle_injected_languages = 't',
+            toggle_anonymous_nodes = 'a',
+            toggle_language_display = 'I',
+            focus_language = 'f',
+            unfocus_language = 'F',
+            update = 'R',
+            goto_node = '<cr>',
+            show_help = '?',
+          }
+        }
       }
     end,
   },
@@ -68,6 +104,28 @@ local plugins = {
       require('gitsigns').setup()
     end
   },
+  {
+    "folke/zen-mode.nvim",
+    opts = {}
+  },
+  {
+    "lambdalisue/reword.vim",
+  },
+  {
+    "kdheepak/lazygit.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+  },
+  {
+    'tpope/vim-rails'
+  },
+  {
+    'tpope/vim-endwise'
+  },
+  {
+    'thoughtbot/vim-rspec'
+  }
 }
 
 -- lazy start
@@ -88,6 +146,10 @@ require("lazy").setup(plugins, opts)
 vim.g.rustfmt_autosave = 1
 
 vim.api.nvim_set_keymap('n', 'gd', '<Plug>(coc-definition)', { silent = true })
+vim.api.nvim_set_keymap('n', 'gy', '<Plug>(coc-type-definition)', { silent = true })
+vim.api.nvim_set_keymap('n', 'gi', '<Plug>(coc-implementation)', { silent = true })
+vim.api.nvim_set_keymap('n', 'gr', '<Plug>(coc-references)', { silent = true })
+
 
 -- telescope
 local builtin = require('telescope.builtin')
@@ -133,3 +195,6 @@ require 'bufferline'.setup({
 
 vim.keymap.set('n', '<Tab>', '<Cmd>BufferLineCycleNext<CR>', {})
 vim.keymap.set('n', '<S-Tab>', '<Cmd>BufferLineCyclePrev<CR>', {})
+
+vim.cmd("colorscheme " .. "iceberg")
+vim.opt.background = 'dark'
