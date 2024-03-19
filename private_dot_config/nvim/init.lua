@@ -32,7 +32,10 @@ end
 -- plugins
 local plugins = {
   {
-    'cocopon/iceberg.vim',
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
   },
   {
     'neoclide/coc.nvim',
@@ -124,8 +127,14 @@ local plugins = {
     'tpope/vim-endwise'
   },
   {
+    'tpope/vim-surround'
+  },
+  {
     'thoughtbot/vim-rspec'
-  }
+  },
+  {
+    'cespare/vim-toml',
+  },
 }
 
 -- lazy start
@@ -196,5 +205,5 @@ require 'bufferline'.setup({
 vim.keymap.set('n', '<Tab>', '<Cmd>BufferLineCycleNext<CR>', {})
 vim.keymap.set('n', '<S-Tab>', '<Cmd>BufferLineCyclePrev<CR>', {})
 
-vim.cmd("colorscheme " .. "iceberg")
+vim.cmd [[colorscheme tokyonight]]
 vim.opt.background = 'dark'
